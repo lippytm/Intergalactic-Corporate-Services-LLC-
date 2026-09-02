@@ -1,8 +1,9 @@
 """Core domain models for clones, tasks, and governed results."""
 
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from enum import StrEnum
-from typing import Any, Callable
+from typing import Any
 
 
 class RiskClass(StrEnum):
