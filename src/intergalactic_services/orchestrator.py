@@ -40,9 +40,9 @@ class HermesOrchestrator:
                 f"No enabled agent supports capability: {task.kind}",
             )
 
-        agent = sorted(candidates, key=lambda item: item.name)[0]
+        agent = min(candidates, key=lambda item: item.name)
         try:
             output = agent.handler(task)
-        except Exception as exc:  # boundary converts failures into auditable results
+        except Exception as exc:  # noqa: BLE001 - boundary converts failures to audit results
             return TaskResult(task.task_id, "error", agent.name, str(exc))
         return TaskResult(task.task_id, "completed", agent.name, reason, output)
