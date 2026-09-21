@@ -14,7 +14,8 @@ A governed foundation for building accessible, flexible, and efficient business 
 The built-in clone registry now includes the **AI Jarvis assistant** for **engineering management**, **communications engineering**, and **communications management** responsibilities.
 
 ```python
-from intergalactic_services import HermesOrchestrator, Task, default_agents
+from intergalactic_services import HermesOrchestrator, Task
+from intergalactic_services.registry import default_agents
 
 orchestrator = HermesOrchestrator(default_agents())
 result = orchestrator.dispatch(

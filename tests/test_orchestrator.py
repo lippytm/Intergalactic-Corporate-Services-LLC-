@@ -3,9 +3,8 @@ from intergalactic_services import (
     HermesOrchestrator,
     RiskClass,
     Task,
-    default_agents,
-    jarvis_assistant,
 )
+from intergalactic_services.registry import default_agents, jarvis_assistant
 
 
 def echo(task: Task) -> dict:
