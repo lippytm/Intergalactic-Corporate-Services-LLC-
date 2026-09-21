@@ -86,5 +86,5 @@ def test_routes_engineering_management_task_to_jarvis() -> None:
         "assistant": "AI Jarvis assistant",
         "role": "Engineer Manager; Communications Engineer and Manager",
         "task": "engineering_management",
-        "payload": {"team": "platform"},
+        "payload_keys": ("team",),
     }

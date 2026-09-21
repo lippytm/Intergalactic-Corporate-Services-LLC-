@@ -18,7 +18,7 @@ def _jarvis_handler(task: Task) -> dict[str, object]:
         "assistant": "AI Jarvis assistant",
         "role": JARVIS_ROLE,
         "task": task.kind,
-        "payload": task.payload,
+        "payload_keys": tuple(sorted(task.payload)),
     }
 
 
