@@ -3,6 +3,7 @@
 from .models import AgentProfile, RiskClass, Task, TaskResult
 from .orchestrator import HermesOrchestrator
 from .policies import GovernancePolicy
+from .registry import builtin_clone_profiles, builtin_clone_registry
 
 __all__ = [
     "AgentProfile",
@@ -11,4 +12,6 @@ __all__ = [
     "RiskClass",
     "Task",
     "TaskResult",
+    "builtin_clone_profiles",
+    "builtin_clone_registry",
 ]

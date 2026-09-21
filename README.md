@@ -11,6 +11,11 @@ A governed foundation for building accessible, flexible, and efficient business 
 - **Human approval gates** — required for external writes, financial actions, destructive operations, and sensitive data.
 - **Audit-ready results** — every task returns a structured decision and reason.
 
+Built-in clone profiles currently include:
+
+- `ai-jarvis-assistant-engineer-manager` for engineering management, technical planning, and delivery review tasks
+- `communications-engineer-manager` for communications management, stakeholder updates, and publishing tasks
+
 ## Quick start
 
 ```bash
