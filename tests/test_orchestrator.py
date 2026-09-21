@@ -80,6 +80,16 @@ def test_builtin_clone_profiles_returns_expected_sequence() -> None:
     )
 
 
+def test_builtin_clone_profiles_preserve_provided_handler() -> None:
+    def alternate_handler(task: Task) -> dict:
+        return {"task_id": task.task_id}
+
+    assert all(
+        profile.handler is alternate_handler
+        for profile in builtin_clone_profiles(alternate_handler)
+    )
+
+
 def test_builtin_clone_registry_matches_profile_sequence() -> None:
     profiles = builtin_clone_profiles(echo)
     registry = builtin_clone_registry(echo)
