@@ -66,6 +66,18 @@ def test_builtin_clone_registry_exposes_manager_profiles() -> None:
         "ai-jarvis-assistant-engineer-manager",
         "communications-engineer-manager",
     }
+    assert registry["ai-jarvis-assistant-engineer-manager"] == AgentProfile(
+        "ai-jarvis-assistant-engineer-manager",
+        "engineering_management",
+        {"engineering_management", "technical_planning", "delivery_review"},
+        echo,
+    )
+    assert registry["communications-engineer-manager"] == AgentProfile(
+        "communications-engineer-manager",
+        "communications_management",
+        {"communications_management", "stakeholder_updates", "publish"},
+        echo,
+    )
 
 
 def test_builtin_engineering_manager_routes_engineering_work() -> None:
