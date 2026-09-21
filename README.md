@@ -18,6 +18,9 @@ python -m pip install -e ".[dev]"
 pytest
 ```
 
+The built-in clone registry includes AI Jarvis Assistant, Engineer Manager, and
+Communications Manager profiles for default Hermes routing.
+
 See [Architecture](docs/ARCHITECTURE.md), [Governance](docs/GOVERNANCE.md), and the [Product Roadmap](docs/PRODUCT_ROADMAP.md).
 
 ## Security

@@ -3,6 +3,8 @@ from intergalactic_services import (
     HermesOrchestrator,
     RiskClass,
     Task,
+    build_builtin_registry,
+    list_builtin_agents,
 )
 
 
@@ -56,3 +58,32 @@ def test_rejects_duplicate_agent_names() -> None:
         assert "already registered" in str(exc)
     else:
         raise AssertionError("duplicate registration should fail")
+
+
+def test_builtin_registry_includes_requested_profiles() -> None:
+    registry = build_builtin_registry()
+    assert set(registry) == {
+        "ai-jarvis-assistant",
+        "communications-manager",
+        "engineer-manager",
+    }
+    assert registry["ai-jarvis-assistant"].capabilities >= {"assistant", "research"}
+    assert registry["engineer-manager"].capabilities >= {"engineering", "review"}
+    assert registry["communications-manager"].capabilities >= {
+        "communications",
+        "publishing",
+    }
+
+
+def test_builtin_agents_route_supported_work() -> None:
+    result = HermesOrchestrator(list_builtin_agents()).dispatch(
+        Task("task-5", "communications", {"channel": "email"})
+    )
+    assert result.status == "completed"
+    assert result.agent == "communications-manager"
+    assert result.output == {
+        "agent": "communications-manager",
+        "role": "communications_management",
+        "task_kind": "communications",
+        "payload": {"channel": "email"},
+    }
