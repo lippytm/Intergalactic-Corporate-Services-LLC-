@@ -70,17 +70,27 @@ def test_builtin_clone_registry_exposes_manager_profiles() -> None:
 
 def test_builtin_engineering_manager_routes_engineering_work() -> None:
     engineering_manager, _ = builtin_clone_profiles(echo)
-    result = HermesOrchestrator([engineering_manager]).dispatch(
-        Task("task-5", "engineering_management", {"initiative": "launch"})
-    )
-    assert result.status == "completed"
-    assert result.agent == "ai-jarvis-assistant-engineer-manager"
+    for task_id, kind in (
+        ("task-5", "engineering_management"),
+        ("task-6", "technical_planning"),
+        ("task-7", "delivery_review"),
+    ):
+        result = HermesOrchestrator([engineering_manager]).dispatch(
+            Task(task_id, kind, {"initiative": "launch"})
+        )
+        assert result.status == "completed"
+        assert result.agent == "ai-jarvis-assistant-engineer-manager"
 
 
 def test_builtin_communications_manager_routes_publish_work() -> None:
     _, communications_manager = builtin_clone_profiles(echo)
-    result = HermesOrchestrator([communications_manager]).dispatch(
-        Task("task-6", "publish", {"channel": "newsletter"})
-    )
-    assert result.status == "completed"
-    assert result.agent == "communications-engineer-manager"
+    for task_id, kind in (
+        ("task-8", "communications_management"),
+        ("task-9", "stakeholder_updates"),
+        ("task-10", "publish"),
+    ):
+        result = HermesOrchestrator([communications_manager]).dispatch(
+            Task(task_id, kind, {"channel": "newsletter"})
+        )
+        assert result.status == "completed"
+        assert result.agent == "communications-engineer-manager"
