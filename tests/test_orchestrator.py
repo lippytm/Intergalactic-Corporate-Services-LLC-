@@ -80,6 +80,23 @@ def test_builtin_clone_registry_exposes_manager_profiles() -> None:
     )
 
 
+def test_builtin_clone_profiles_returns_expected_sequence() -> None:
+    assert builtin_clone_profiles(echo) == (
+        AgentProfile(
+            "ai-jarvis-assistant-engineer-manager",
+            "engineering_management",
+            {"engineering_management", "technical_planning", "delivery_review"},
+            echo,
+        ),
+        AgentProfile(
+            "communications-engineer-manager",
+            "communications_management",
+            {"communications_management", "stakeholder_updates", "publish"},
+            echo,
+        ),
+    )
+
+
 def test_builtin_engineering_manager_routes_engineering_work() -> None:
     engineering_manager, _ = builtin_clone_profiles(echo)
     for task_id, kind in (
