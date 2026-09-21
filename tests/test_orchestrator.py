@@ -4,7 +4,11 @@ from intergalactic_services import (
     RiskClass,
     Task,
 )
-from intergalactic_services.registry import default_agents, jarvis_assistant
+from intergalactic_services.registry import (
+    JARVIS_CAPABILITIES,
+    default_agents,
+    jarvis_assistant,
+)
 
 
 def echo(task: Task) -> dict:
@@ -63,11 +67,7 @@ def test_jarvis_assistant_declares_expected_roles() -> None:
     agent = jarvis_assistant()
     assert agent.name == "ai-jarvis-assistant"
     assert agent.role == "Engineer Manager; Communications Engineer and Manager"
-    assert agent.capabilities == {
-        "engineering_management",
-        "communications_engineering",
-        "communications_management",
-    }
+    assert agent.capabilities == set(JARVIS_CAPABILITIES)
 
 
 def test_default_agents_include_jarvis() -> None:

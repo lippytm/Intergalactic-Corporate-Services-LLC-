@@ -4,6 +4,13 @@ from .models import AgentProfile, Task
 
 JARVIS_NAME = "ai-jarvis-assistant"
 JARVIS_ROLE = "Engineer Manager; Communications Engineer and Manager"
+JARVIS_CAPABILITIES = frozenset(
+    {
+        "engineering_management",
+        "communications_engineering",
+        "communications_management",
+    }
+)
 
 
 def _jarvis_handler(task: Task) -> dict[str, object]:
@@ -19,11 +26,7 @@ def jarvis_assistant() -> AgentProfile:
     return AgentProfile(
         JARVIS_NAME,
         JARVIS_ROLE,
-        {
-            "engineering_management",
-            "communications_engineering",
-            "communications_management",
-        },
+        set(JARVIS_CAPABILITIES),
         _jarvis_handler,
     )
 
