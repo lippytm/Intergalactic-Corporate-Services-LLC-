@@ -11,6 +11,18 @@ A governed foundation for building accessible, flexible, and efficient business 
 - **Human approval gates** — required for external writes, financial actions, destructive operations, and sensitive data.
 - **Audit-ready results** — every task returns a structured decision and reason.
 
+The built-in clone registry now includes the **AI Jarvis assistant** for **engineering management**, **communications engineering**, and **communications management** responsibilities.
+
+```python
+from intergalactic_services import HermesOrchestrator, Task
+from intergalactic_services.registry import default_agents
+
+orchestrator = HermesOrchestrator(default_agents())
+result = orchestrator.dispatch(
+    Task("task-1", "engineering_management", {"team": "platform"})
+)
+```
+
 ## Quick start
 
 ```bash

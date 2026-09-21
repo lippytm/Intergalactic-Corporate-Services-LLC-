@@ -1,6 +1,6 @@
 """Core domain models for clones, tasks, and governed results."""
 
-from collections.abc import Callable
+from collections.abc import Callable, Collection
 from dataclasses import dataclass, field
 from enum import StrEnum
 from typing import Any
@@ -39,6 +39,9 @@ Handler = Callable[[Task], Any]
 class AgentProfile:
     name: str
     role: str
-    capabilities: set[str]
+    capabilities: Collection[str]
     handler: Handler
     enabled: bool = True
+
+    def __post_init__(self) -> None:
+        self.capabilities = frozenset(self.capabilities)

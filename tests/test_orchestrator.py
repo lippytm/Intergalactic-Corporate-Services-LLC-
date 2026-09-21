@@ -4,6 +4,11 @@ from intergalactic_services import (
     RiskClass,
     Task,
 )
+from intergalactic_services.registry import (
+    JARVIS_CAPABILITIES,
+    default_agents,
+    jarvis_assistant,
+)
 
 
 def echo(task: Task) -> dict:
@@ -56,3 +61,30 @@ def test_rejects_duplicate_agent_names() -> None:
         assert "already registered" in str(exc)
     else:
         raise AssertionError("duplicate registration should fail")
+
+
+def test_jarvis_assistant_declares_expected_roles() -> None:
+    agent = jarvis_assistant()
+    assert agent.name == "ai-jarvis-assistant"
+    assert agent.role == "Engineer Manager; Communications Engineer and Manager"
+    assert agent.capabilities == JARVIS_CAPABILITIES
+
+
+def test_default_agents_include_jarvis() -> None:
+    agents = default_agents()
+    assert len(agents) == 1
+    assert agents[0].name == "ai-jarvis-assistant"
+
+
+def test_routes_engineering_management_task_to_jarvis() -> None:
+    result = HermesOrchestrator(default_agents()).dispatch(
+        Task("task-5", "engineering_management", {"team": "platform"})
+    )
+    assert result.status == "completed"
+    assert result.agent == "ai-jarvis-assistant"
+    assert result.output == {
+        "assistant": "AI Jarvis assistant",
+        "role": "Engineer Manager; Communications Engineer and Manager",
+        "task": "engineering_management",
+        "payload_keys": ("team",),
+    }
