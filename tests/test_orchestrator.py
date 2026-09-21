@@ -6,6 +6,7 @@ from intergalactic_services import (
     builtin_clone_profiles,
     builtin_clone_registry,
 )
+from intergalactic_services.registry import BUILTIN_CLONE_SPECS
 
 
 def echo(task: Task) -> dict:
@@ -62,38 +63,20 @@ def test_rejects_duplicate_agent_names() -> None:
 
 def test_builtin_clone_registry_exposes_manager_profiles() -> None:
     registry = builtin_clone_registry(echo)
-    assert set(registry) == {
-        "ai-jarvis-assistant-engineer-manager",
-        "ai-jarvis-assistant-communications-engineer-manager",
-    }
-    assert registry["ai-jarvis-assistant-engineer-manager"] == AgentProfile(
-        "ai-jarvis-assistant-engineer-manager",
-        "engineering_management",
-        {"engineering_management", "technical_planning", "delivery_review"},
-        echo,
-    )
-    assert registry["ai-jarvis-assistant-communications-engineer-manager"] == AgentProfile(
-        "ai-jarvis-assistant-communications-engineer-manager",
-        "communications_management",
-        {"communications_management", "stakeholder_updates", "publish"},
-        echo,
-    )
+    assert set(registry) == {spec.name for spec in BUILTIN_CLONE_SPECS}
+    for spec in BUILTIN_CLONE_SPECS:
+        assert registry[spec.name] == AgentProfile(
+            spec.name,
+            spec.role,
+            set(spec.capabilities),
+            echo,
+        )
 
 
 def test_builtin_clone_profiles_returns_expected_sequence() -> None:
-    assert builtin_clone_profiles(echo) == (
-        AgentProfile(
-            "ai-jarvis-assistant-engineer-manager",
-            "engineering_management",
-            {"engineering_management", "technical_planning", "delivery_review"},
-            echo,
-        ),
-        AgentProfile(
-            "ai-jarvis-assistant-communications-engineer-manager",
-            "communications_management",
-            {"communications_management", "stakeholder_updates", "publish"},
-            echo,
-        ),
+    assert builtin_clone_profiles(echo) == tuple(
+        AgentProfile(spec.name, spec.role, set(spec.capabilities), echo)
+        for spec in BUILTIN_CLONE_SPECS
     )
 
 
