@@ -21,7 +21,7 @@ BUILTIN_AGENT_SPECS = (
 )
 
 
-def _bounded_handler(agent_name: str, role: str):
+def _bound_handler(agent_name: str, role: str):
     def handle(task: Task) -> dict[str, object]:
         return {
             "agent": agent_name,
@@ -36,7 +36,7 @@ def _bounded_handler(agent_name: str, role: str):
 def build_builtin_registry() -> dict[str, AgentProfile]:
     """Return the default clone profiles shipped with the foundation."""
     return {
-        name: AgentProfile(name, role, set(capabilities), _bounded_handler(name, role))
+        name: AgentProfile(name, role, set(capabilities), _bound_handler(name, role))
         for name, role, capabilities in BUILTIN_AGENT_SPECS
     }
 
