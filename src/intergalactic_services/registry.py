@@ -2,11 +2,14 @@
 
 from .models import AgentProfile, Task
 
+JARVIS_NAME = "ai-jarvis-assistant"
+JARVIS_ROLE = "Engineer Manager and Communications Engineer and Manager"
+
 
 def _jarvis_handler(task: Task) -> dict[str, object]:
     return {
         "assistant": "AI Jarvis assistant",
-        "role": "Engineer Manager and Communications Engineer and Manager",
+        "role": JARVIS_ROLE,
         "task": task.kind,
         "payload": task.payload,
     }
@@ -14,8 +17,8 @@ def _jarvis_handler(task: Task) -> dict[str, object]:
 
 def jarvis_assistant() -> AgentProfile:
     return AgentProfile(
-        "ai-jarvis-assistant",
-        "Engineer Manager and Communications Engineer and Manager",
+        JARVIS_NAME,
+        JARVIS_ROLE,
         {
             "engineering_management",
             "communications_engineering",
