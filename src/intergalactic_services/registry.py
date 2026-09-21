@@ -14,7 +14,7 @@ def builtin_clone_profiles(handler: Handler) -> tuple[AgentProfile, ...]:
             handler=handler,
         ),
         AgentProfile(
-            name="communications-engineer-manager",
+            name="ai-jarvis-assistant-communications-engineer-manager",
             role="communications_management",
             capabilities={"communications_management", "stakeholder_updates", "publish"},
             handler=handler,

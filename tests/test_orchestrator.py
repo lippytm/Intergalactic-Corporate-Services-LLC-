@@ -64,7 +64,7 @@ def test_builtin_clone_registry_exposes_manager_profiles() -> None:
     registry = builtin_clone_registry(echo)
     assert set(registry) == {
         "ai-jarvis-assistant-engineer-manager",
-        "communications-engineer-manager",
+        "ai-jarvis-assistant-communications-engineer-manager",
     }
     assert registry["ai-jarvis-assistant-engineer-manager"] == AgentProfile(
         "ai-jarvis-assistant-engineer-manager",
@@ -72,8 +72,8 @@ def test_builtin_clone_registry_exposes_manager_profiles() -> None:
         {"engineering_management", "technical_planning", "delivery_review"},
         echo,
     )
-    assert registry["communications-engineer-manager"] == AgentProfile(
-        "communications-engineer-manager",
+    assert registry["ai-jarvis-assistant-communications-engineer-manager"] == AgentProfile(
+        "ai-jarvis-assistant-communications-engineer-manager",
         "communications_management",
         {"communications_management", "stakeholder_updates", "publish"},
         echo,
@@ -89,12 +89,22 @@ def test_builtin_clone_profiles_returns_expected_sequence() -> None:
             echo,
         ),
         AgentProfile(
-            "communications-engineer-manager",
+            "ai-jarvis-assistant-communications-engineer-manager",
             "communications_management",
             {"communications_management", "stakeholder_updates", "publish"},
             echo,
         ),
     )
+
+
+def test_builtin_clone_registry_matches_profile_sequence() -> None:
+    profiles = builtin_clone_profiles(echo)
+    registry = builtin_clone_registry(echo)
+
+    assert len(registry) == len(profiles)
+    assert list(registry) == [profile.name for profile in profiles]
+    assert len({profile.name for profile in profiles}) == len(profiles)
+    assert tuple(registry.values()) == profiles
 
 
 def test_builtin_engineering_manager_routes_engineering_work() -> None:
@@ -122,4 +132,4 @@ def test_builtin_communications_manager_routes_publish_work() -> None:
             Task(task_id, kind, {"channel": "newsletter"})
         )
         assert result.status == "completed"
-        assert result.agent == "communications-engineer-manager"
+        assert result.agent == "ai-jarvis-assistant-communications-engineer-manager"

@@ -14,7 +14,7 @@ A governed foundation for building accessible, flexible, and efficient business 
 Built-in clone profiles currently include:
 
 - `ai-jarvis-assistant-engineer-manager` for engineering management, technical planning, and delivery review tasks
-- `communications-engineer-manager` for communications management, stakeholder updates, and publishing tasks
+- `ai-jarvis-assistant-communications-engineer-manager` for communications management, stakeholder updates, and publishing tasks
 
 ## Quick start
 
