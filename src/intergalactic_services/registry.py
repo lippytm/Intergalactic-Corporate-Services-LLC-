@@ -22,6 +22,8 @@ BUILTIN_AGENT_SPECS = (
 
 
 def _bound_handler(agent_name: str, role: str):
+    """Create the default built-in handler that echoes task metadata."""
+
     def handle(task: Task) -> dict[str, object]:
         return {
             "agent": agent_name,
