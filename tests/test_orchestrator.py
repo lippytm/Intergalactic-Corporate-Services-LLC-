@@ -67,7 +67,7 @@ def test_jarvis_assistant_declares_expected_roles() -> None:
     agent = jarvis_assistant()
     assert agent.name == "ai-jarvis-assistant"
     assert agent.role == "Engineer Manager; Communications Engineer and Manager"
-    assert agent.capabilities == set(JARVIS_CAPABILITIES)
+    assert agent.capabilities == JARVIS_CAPABILITIES
 
 
 def test_default_agents_include_jarvis() -> None:

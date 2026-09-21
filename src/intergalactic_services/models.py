@@ -39,6 +39,9 @@ Handler = Callable[[Task], Any]
 class AgentProfile:
     name: str
     role: str
-    capabilities: set[str]
+    capabilities: frozenset[str]
     handler: Handler
     enabled: bool = True
+
+    def __post_init__(self) -> None:
+        self.capabilities = frozenset(self.capabilities)

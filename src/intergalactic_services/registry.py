@@ -26,7 +26,7 @@ def jarvis_assistant() -> AgentProfile:
     return AgentProfile(
         JARVIS_NAME,
         JARVIS_ROLE,
-        set(JARVIS_CAPABILITIES),
+        JARVIS_CAPABILITIES,
         _jarvis_handler,
     )
 
