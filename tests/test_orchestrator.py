@@ -107,6 +107,17 @@ def test_builtin_clone_registry_matches_profile_sequence() -> None:
     assert tuple(registry.values()) == profiles
 
 
+def test_builtin_clone_registry_is_read_only() -> None:
+    registry = builtin_clone_registry(echo)
+
+    try:
+        registry["new-profile"] = AgentProfile("new-profile", "general", set(), echo)
+    except TypeError:
+        pass
+    else:
+        raise AssertionError("built-in registry should be read-only")
+
+
 def test_builtin_engineering_manager_routes_engineering_work() -> None:
     engineering_manager, _ = builtin_clone_profiles(echo)
     for task_id, kind in (

@@ -1,5 +1,8 @@
 """Built-in clone profiles for common engineering and communications workflows."""
 
+from collections.abc import Mapping
+from types import MappingProxyType
+
 from .models import AgentProfile, Handler
 
 
@@ -22,7 +25,9 @@ def builtin_clone_profiles(handler: Handler) -> tuple[AgentProfile, ...]:
     )
 
 
-def builtin_clone_registry(handler: Handler) -> dict[str, AgentProfile]:
-    """Return built-in clone profiles keyed by agent name."""
+def builtin_clone_registry(handler: Handler) -> Mapping[str, AgentProfile]:
+    """Return a read-only mapping of built-in clone profiles keyed by agent name."""
 
-    return {profile.name: profile for profile in builtin_clone_profiles(handler)}
+    return MappingProxyType(
+        {profile.name: profile for profile in builtin_clone_profiles(handler)}
+    )
