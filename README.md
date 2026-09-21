@@ -17,7 +17,9 @@ The built-in clone registry now includes the **AI Jarvis assistant** for **Engin
 from intergalactic_services import HermesOrchestrator, Task, default_agents
 
 orchestrator = HermesOrchestrator(default_agents())
-result = orchestrator.dispatch(Task("task-1", "engineering_management"))
+result = orchestrator.dispatch(
+    Task("task-1", "engineering_management", {"team": "platform"})
+)
 ```
 
 ## Quick start

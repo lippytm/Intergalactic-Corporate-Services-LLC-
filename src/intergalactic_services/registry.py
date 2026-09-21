@@ -3,7 +3,7 @@
 from .models import AgentProfile, Task
 
 JARVIS_NAME = "ai-jarvis-assistant"
-JARVIS_ROLE = "Engineer Manager and Communications Engineer and Manager"
+JARVIS_ROLE = "Engineer Manager; Communications Engineer and Manager"
 
 
 def _jarvis_handler(task: Task) -> dict[str, object]:

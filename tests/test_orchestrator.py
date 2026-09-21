@@ -63,7 +63,7 @@ def test_rejects_duplicate_agent_names() -> None:
 def test_jarvis_assistant_declares_expected_roles() -> None:
     agent = jarvis_assistant()
     assert agent.name == "ai-jarvis-assistant"
-    assert agent.role == "Engineer Manager and Communications Engineer and Manager"
+    assert agent.role == "Engineer Manager; Communications Engineer and Manager"
     assert agent.capabilities == {
         "engineering_management",
         "communications_engineering",
@@ -85,7 +85,7 @@ def test_routes_engineering_management_task_to_jarvis() -> None:
     assert result.agent == "ai-jarvis-assistant"
     assert result.output == {
         "assistant": "AI Jarvis assistant",
-        "role": "Engineer Manager and Communications Engineer and Manager",
+        "role": "Engineer Manager; Communications Engineer and Manager",
         "task": "engineering_management",
         "payload": {"team": "platform"},
     }
