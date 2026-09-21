@@ -4,7 +4,7 @@ from .models import AgentProfile, Handler
 
 
 def builtin_clone_profiles(handler: Handler) -> tuple[AgentProfile, ...]:
-    """Return the built-in AI Jarvis Assistant clone profiles."""
+    """Return the built-in engineering and communications manager profiles."""
 
     return (
         AgentProfile(
